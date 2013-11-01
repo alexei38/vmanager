@@ -13,17 +13,38 @@
     <div class="container-fluid">
       <%= link_to "Vmanager", root_path, :class => "brand" %>
       <div class="nav-collapse collapse">
-        <ul class="nav">
-          <%= nav_link 'Машины', machines_path, 'machines'  %>
-          <%= nav_link 'Шаблоны', templates_path, 'templates'  %>
-          <%= nav_link 'Администрирование', admin_path, 'admin'  %>
-        </ul>
         <% if user_signed_in? %>
+        <ul class="nav">
+          <%= nav_link 'Dashboard', "#", 'dashboard' %>
+          <%= nav_link 'Machines', machines_path, 'machines' %>
+          <%= nav_link 'Templates', templates_path, 'templates' %>
+          <%= nav_link 'Networks', "#", 'networks'  %>
+          <%= nav_link 'Hosts', hosts_path, 'hosts' %>
+          <% if current_user.is_admin? %>
+            <li class="dropdown">
+              <%= link_to "#", :class => "dropdown-toggle", :data => {:toggle=>"dropdown"} do %>
+                <%= content_tag(:span, '', :class => 'icon-chevron-right icon-white') %> Admin <%= content_tag(:span, '', :class => 'caret') %>
+              <% end %>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to users_path do %>
+                    <%= content_tag(:span, '', :class => 'icon-user') %> Users
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to roles_path do %>
+                    <%= content_tag(:span, '', :class => 'icon-align-right') %> Roles
+                  <% end %>
+                </li>
+              </ul>
+            </li>
+          <% end %>
+        </ul>
         <ul class="nav pull-right">
           <li>
             <%= link_to [current_user.lastname, current_user.firstname].join(' '), user_path(current_user) %></a>
           </li>
-          <li><%= link_to "Выход", destroy_user_session_path, :method => :delete %></li>
+          <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
         </ul>
         <% end %>
       </div>
@@ -33,12 +54,6 @@
 <header style="position: relative;padding: 40px 0px;"></header>
 
 <%= yield %>
-
-<div>
-  <footer>
-    <p class="pull-right">© <a href="#" target="_blank">Lastname Firstname</a> 2013</p>
-  </footer>
-</div>
 
 
 </body>

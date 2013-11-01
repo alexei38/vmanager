@@ -1,22 +1,9 @@
-<div class="container-fluid">
-  <div class="row-fluid">
-
-    <%= render "left" %>
-
-    <div id="content" class="span10">
+<div class="container">
+  <div class="row">
+    <div id="content">
       <div class="well">
-        <h2><%= @host.name %></h2>
-        <p>IP: <%= @host.host %></p>
-        <p>Port: <%= @host.port %></p>
-        <p>
-
-          <%= link_to 'Edit', edit_host_path(@host), :class => "btn btn-success" %>
-          <%= link_to 'Remove', host_path(@host), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" %>
-
-        </p>
+        <h1>Hello world!</h1>
       </div>
     </div>
+  </div>
 </div>
-
-
-

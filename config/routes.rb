@@ -7,15 +7,11 @@ Vmanager::Application.routes.draw do
   devise_for :users, :path => '', :path_names => { :sign_in => "login", :sign_out => "logout" }
 
   #match 'admin/roles', to: 'admin/roles#index', via: :get
-  match 'admin', to: 'admin/admin#index', via: :get
+  match 'admin', to: 'admin#index', via: :get
 
   resources :users
   resources :roles
-
-  namespace :admin do
-    resources :hosts
-  end
-
+  resources :hosts
   resources :machines
   resources :templates
 

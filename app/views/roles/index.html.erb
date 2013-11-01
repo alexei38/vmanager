@@ -1,36 +1,30 @@
-<div class="container-fluid">
-  <div class="row-fluid">
-
-    <%= render "admin/left" %>
-
-    <div id="content" class="span10">
+<div class="container">
+  <div class="row">
+    <div id="content">
       <div class="well">
-        <p><a href="<%= new_role_path %>" class="btn btn-success"><i class="icon-plus icon-white"></i><span class="hidden-tablet"> Создать</span></a></p>
         <table class="table table-bordered table-condensed table-striped">
           <thead>
-          	<tr>
-          		<th>Role</th>
-          		<th>Users</th>
-          		<th>Action</th>
-          	</tr>
+            <tr>
+              <th>Role</th>
+              <th>Users</th>
+              <th>Action</th>
+            </tr>
           </thead>
           <tbody>
             <% @roles.each do |role| %>
-          	<tr>
-          		<td><%= link_to role.name, role_path(role) %></td>
-          		<td>
-          		  <% role.users.each do |user| %>
-          		    <%= user.username %><br />
-          		  <% end %>
-          		</td>
-          		<td><%= link_to 'Edit', edit_role_path(role), :class => "btn btn-success btn-mini" %></td>
-          	</tr>
-          	<% end %>
+            <tr>
+              <td><%= link_to role.name, role_path(role) %></td>
+              <td>
+                <% role.users.each do |user| %>
+                  <%= user.username %><br />
+                <% end %>
+              </td>
+              <td><%= link_to 'Edit', edit_role_path(role), :class => "btn btn-success btn-mini" %></td>
+            </tr>
+            <% end %>
           </tbody>
         </table>
       </div>
     </div>
+  </div>
 </div>
-
-
-

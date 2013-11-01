@@ -1,6 +1,6 @@
 class HostsController < ApplicationController
 
-  load_and_authorize_resource
+  #load_and_authorize_resource
 
   def show
     @host = Host.find(params[:id])
@@ -41,7 +41,7 @@ class HostsController < ApplicationController
     @host = Host.find(params[:id])
     @host.destroy
     respond_to do |format|
-      format.html { redirect_to hosts_path }
+      format.html { redirect_to admin_hosts_path }
       format.xml  { head :ok }
     end
   end

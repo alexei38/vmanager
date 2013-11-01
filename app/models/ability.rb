@@ -18,8 +18,8 @@ class Ability
 
   def admin
     can :manage, Devise
-    can :read, Host
-    can :read, Machine
+    can :manage, Host
+    can :manage, Machine
   end
 
 end

@@ -1,5 +1,7 @@
 class RolesController < ApplicationController
-  
+
+  #load_and_authorize_resource
+
   def index
     @roles = Role.all
   end
@@ -32,7 +34,7 @@ class RolesController < ApplicationController
   def update
     @role = Role.find(params[:id])
  
-    if @role.update_attributes(params[:host])
+    if @role.update_attributes(params[:role])
       redirect_to @role
     else
       render 'edit'
@@ -47,4 +49,5 @@ class RolesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
 end

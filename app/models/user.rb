@@ -35,15 +35,12 @@ class User < ActiveRecord::Base
       self.email = tempmail
   end
 
+  def is_admin?
+    role?(:admin)
+  end
+
   def role?(role)
     return !!self.roles.find_by_name(role)
   end 
   
-  private
-    def create_role
-      self.roles << Role.find_by_name(:user)  if ENV["RAILS_ENV"] != 'test' 
-    end
-
-
-
 end

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vmanager</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <%= link_to "Vmanager", root_path, :class => "brand" %>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <%= nav_link 'Машины', machines_path, 'machines'  %>
+          <%= nav_link 'Шаблоны', templates_path, 'templates'  %>
+          <%= nav_link 'Администрирование', admin_path, 'admin'  %>
+        </ul>
+        <% if user_signed_in? %>
+        <ul class="nav pull-right">
+          <li>
+            <%= link_to [current_user.lastname, current_user.firstname].join(' '), user_path(current_user) %></a>
+          </li>
+          <li><%= link_to "Выход", destroy_user_session_path, :method => :delete %></li>
+        </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<header style="position: relative;padding: 40px 0px;"></header>
+
+<%= yield %>
+
+<div>
+  <footer>
+    <p class="pull-right">© <a href="#" target="_blank">Lastname Firstname</a> 2013</p>
+  </footer>
+</div>
+
+
+</body>
+</html>

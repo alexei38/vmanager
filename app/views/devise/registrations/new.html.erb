@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="well form-signin">
+
+  <%= content_tag(:div, flash[:error], :id => "flash_error", :class => "alert alert-error") if flash[:error] %>
+  <%= content_tag(:div, flash[:notice], :id => "flash_notice", :class => "alert alert-info") if flash[:notice] %>
+
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+
+    <h2 class="form-signin-heading">Регистрация</h2>
+
+    <%= f.text_field :username, :autofocus => true, :class => "input-block-level", :placeholder => "Login" %>
+    <%= f.password_field :password, :class => "input-block-level", :placeholder => "Password" %>
+    <%= f.password_field :password_confirmation, :class => "input-block-level", :placeholder => "Confirm password" %>
+    <%= f.submit "Регистрация", :class => "btn btn-large btn-primary" %>
+
+  <% end %>
+
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+
+  </div>
+</div>

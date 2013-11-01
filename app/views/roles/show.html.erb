@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+
+    <%= render "admin/left" %>
+
+    <div id="content" class="span10">
+      <div class="well">
+        <h2><%= @role.name %></h2>
+        <p>
+
+          <%= link_to 'Edit', edit_role_path(@role), :class => "btn btn-success" %>
+          <%= link_to 'Remove', role_path(@role), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" %>
+
+        </p>
+      </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,11 @@
+<%= form_for @host do |f| %>
+  <%= f.label :name, "Имя сервера" %>
+  <%= f.text_field :name %>
+  <%= f.label :host, "IP сервера" %>
+  <%= f.text_field :host %>
+  <%= f.label :port, "Порт сервера" %>
+  <%= f.text_field :port %>
+  <br />
+  <%= f.submit "Submit", :class => "btn btn-large btn-primary" %>
+<% end %>
+

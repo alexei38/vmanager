@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+
+    <%= render "admin/left" %>
+
+    <div id="content" class="span10">
+      <div class="well">
+        <table class="table table-bordered table-condensed table-striped">
+          <thead>
+          	<tr>
+          		<th>LastName</th>
+          		<th>FirstName</th>
+          		<th>Login</th>
+          		<th>Email</th>
+          		<th>LastLogin</th>
+          		<th>Action</th>
+          	</tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+          	<tr>
+          		<td><%= link_to user.lastname, user_path(user) %></a></td>
+          		<td><%= link_to user.firstname, user_path(user) %></td>
+          		<td><%= link_to user.username, user_path(user) %></td>
+          		<td><%= user.email %></td>
+          		<td><%= user.updated_at %></td>
+          		<td><%= link_to 'Edit', edit_user_path(user), :class => "btn btn-success btn-mini" %></td>
+          	</tr>
+          	<% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
+
+
+

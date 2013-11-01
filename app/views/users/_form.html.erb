@@ -1,0 +1,11 @@
+<%= form_for @user do |f| %>
+  <%= f.label :lastname, "Фамилия" %>
+  <%= f.text_field :lastname %>
+  <%= f.label :firstname, "Имя" %>
+  <%= f.text_field :firstname %>
+  <%= f.label :email, "Почтовый ящик" %>
+  <%= f.text_field :email %>
+  <br />
+  <%= f.submit "Submit", :class => "btn btn-large btn-primary" %>
+<% end %>
+

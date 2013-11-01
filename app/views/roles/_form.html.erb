@@ -1,0 +1,7 @@
+<%= form_for @role do |f| %>
+  <%= f.label :name, "Имя роли" %>
+  <%= f.text_field :name %>
+  <br />
+  <%= f.submit "Submit", :class => "btn btn-large btn-primary" %>
+<% end %>
+

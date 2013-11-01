@@ -1,0 +1,16 @@
+    <div class="span2 main-menu-span">
+      <div class="well nav-collapse sidebar-nav">
+        <ul class="nav nav-list">
+
+          <li class="nav-header hidden-tablet">Дествие</li>
+          <li style="margin-left: -2px;"><a href="<%= new_admin_host_path %>"><i class="icon-plus"></i> Создать</a></li>
+
+          <li class="nav-header hidden-tablet">Хосты</li>
+
+          <% get_allhost.each do |host| %>
+            <li style="margin-left: -2px;"><a href="<%= admin_host_path(host) %>"><i class="icon-chevron-right"></i> <%= host.name %></a></li>
+          <% end %>
+
+        </ul>
+      </div>
+    </div>

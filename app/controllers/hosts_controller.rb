@@ -1,11 +1,15 @@
 class HostsController < ApplicationController
 
   #load_and_authorize_resource
+  require 'virt'
+  def index
+    @hosts = Host.all
+   end
 
   def show
     @host = Host.find(params[:id])
  
-    respond_to do |format|
+     respond_to do |format|
       format.html
     end
   end

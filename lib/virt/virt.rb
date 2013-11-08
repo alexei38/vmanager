@@ -1,5 +1,7 @@
+require 'libvirt'
+
 module Virt
   def self.connection(uri)
-    @connect = Libvirt::open(uri)
+    Libvirt::open(uri)
   end
 end

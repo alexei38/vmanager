@@ -15,24 +15,24 @@ class User < ActiveRecord::Base
   before_save :get_ldap_lastname, :get_ldap_firstname, :get_ldap_email
  
   def get_ldap_lastname
-      Rails::logger.info("### Getting the users last name")
+    unless self.lastname
       tempname = Devise::LdapAdapter.get_ldap_param(self.username,"sn")
-      Rails::logger.info "\tLDAP returned lastname of " + tempname
       self.lastname = tempname
+    end
   end
  
   def get_ldap_firstname
-      Rails::logger.info("### Getting the users first name")
+    unless self.firstname
       tempname = Devise::LdapAdapter.get_ldap_param(self.username,"givenname")
-      Rails::logger.info "\tLDAP returned firstname of " + tempname
       self.firstname = tempname
+    end
   end
  
   def get_ldap_email
-      Rails::logger.info("### Getting the users email address")
+    unless self.email
       tempmail = Devise::LdapAdapter.get_ldap_param(self.username,"mail")
-      Rails::logger.info "\tLDAP returned email of " + tempmail
       self.email = tempmail
+    end
   end
 
   def is_admin?

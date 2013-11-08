@@ -1,8 +1,27 @@
 <div class="container">
   <div class="row">
     <div id="content">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+      <ul class="breadcrumb">
+        <li><%= link_to "Vmanager", root_path %> <span class="divider">/</span></li>
+        <li class="active">Hosts</li>
+      </ul>
+      <div class="btn-toolbar">
+        <%= link_to "New", new_host_path, :class => "btn btn-primary" %>
+      </div>
       <div class="well">
-        <h1>Hello world!</h1>
+      <% @hosts.each do |host| %>
+        <%
+          Virt.connection
+        %>
+      <% end %>
+
+      %>
+        <% if @conn %>
+          <p>hostname <%= @conn.hostname %></p>
+        <% end %>
       </div>
     </div>
   </div>

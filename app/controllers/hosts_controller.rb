@@ -4,7 +4,12 @@ class HostsController < ApplicationController
   def index
     @hosts = Host.all
     @host = Host.new
-   end
+    
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 
   def show
     @host = Host.find(params[:id])
@@ -12,10 +17,6 @@ class HostsController < ApplicationController
      respond_to do |format|
       format.html
     end
-  end
-
-  def new
-    @host = Host.new
   end
 
   def create

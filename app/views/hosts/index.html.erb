@@ -42,18 +42,16 @@
 
       <% else %>
         <div class="well" style="text-align: center;">
-          <h4 style="font-size: 18px;font-weight: 500;">Добавьте новый хост</h4>
+          <h4 style="font-size: 18px;font-weight: 500;">Add a new host</h4>
         </div>
       <% end %>
 
-      <!-- Button to trigger modal -->
-        <a data-toggle="modal" href="#myModal" class="btn btn-primary">Add host</a>
-      <!-- Modal -->
+        <a data-toggle="modal" href="#addHostModal" class="btn btn-primary">Add host</a>
 
-        <div style="display: none;" id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div style="display: none;" id="addHostModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addHostModalLabel" aria-hidden="true">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel">Add host</h3>
+            <h3 id="addHostModalLabel">Add host</h3>
           </div>
           <div class="modal-body">
             <div class="tabbable">
@@ -63,67 +61,24 @@
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="tab1">
-                  <form class="form-horizontal">
-                    <div class="control-group">
-                      <label class="control-label" for="hostname">Name</label>
-                      <div class="controls">
-                        <input type="text" id="hostname" placeholder="Hostname">
-                      </div>
-                    </div>
-                    <div class="control-group">
-                      <label class="control-label" for="ip">IP / Domain</label>
-                      <div class="controls">
-                        <input type="text" id="ip" placeholder="IP Address">
-                      </div>
-                    </div>
-                    <div class="control-group">
-                      <label class="control-label" for="tcp_login">Login</label>
-                      <div class="controls">
-                        <input type="text" id="tcp_login" placeholder="Login">
-                      </div>
-                    </div>
-                    <div class="control-group">
-                      <label class="control-label" for="tcp_password">Password</label>
-                      <div class="controls">
-                        <input type="text" id="tcp_password" placeholder="Password">
-                      </div>
-                    </div>
-                    <div class="control-group">
-                      <label class="control-label" for="tcp_confirm_password">Confirm Password</label>
-                      <div class="controls">
-                        <input type="text" id="tcp_confirm_password" placeholder="Confirm Password">
-                      </div>
-                    </div>
-                  </form>
+                  <%= form_tag new_host_path, :class => 'form-horizontal' do %>
+                    <input type="hidden" name="type" id="type" value="tcp" />
+                    <%= custom_form "hostname", "Hostname" %>
+                    <%= custom_form "ip", "IP / Domain" %>
+                    <%= custom_form "tcp_login", "Login" %>
+                    <%= custom_form "tcp_password", "Password", true %>
+                    <%= custom_form "tcp_confirm_password", "Confirm Password", true %>
+                  <% end %>
                 </div>
 
                 <div class="tab-pane" id="tab2">
-                  <form class="form-horizontal">
-                    <div class="control-group">
-                      <label class="control-label" for="hostname">Name</label>
-                      <div class="controls">
-                        <input type="text" id="hostname" placeholder="Hostname">
-                      </div>
-                    </div>
-                    <div class="control-group">
-                      <label class="control-label" for="ip">IP / Domain</label>
-                      <div class="controls">
-                        <input type="text" id="ip" placeholder="IP Address">
-                      </div>
-                    </div>
-                    <div class="control-group">
-                      <label class="control-label" for="ssh_login">SSH Login</label>
-                      <div class="controls">
-                        <input type="text" id="ssh_login" placeholder="SSH Login">
-                      </div>
-                    </div>
-                    <div class="control-group">
-                      <label class="control-label" for="ssh_port">SSH Port</label>
-                      <div class="controls">
-                        <input type="text" id="ssh_port" placeholder="SSH Port">
-                      </div>
-                    </div>
-                  </form>
+                  <%= form_tag new_host_path, :class => 'form-horizontal' do %>
+                    <input type="hidden" name="type" id="type" value="ssh" />
+                    <%= custom_form "hostname", "Hostname" %>
+                    <%= custom_form "ip", "IP / Domain" %>
+                    <%= custom_form "ssh_login", "SSH Login" %>
+                    <%= custom_form "ssh_port", "SSH Port" %>
+                  <% end %>
                 </div>
               </div>
             </div>
@@ -133,7 +88,6 @@
             <button class="btn btn-primary">Add</button>
           </div>
         </div>
-
 
     </div>
   </div>

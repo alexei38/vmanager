@@ -1,0 +1,77 @@
+
+                
+                    <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        Your CPU doesn't support hardware virtualization
+                    </div>
+                
+            
+            <div class="page-header">
+                <h1>Overview</h1>
+            </div>
+            <div class="row show-grid">
+                <div class="span6">
+                    <p>Hostname</p>
+                    <p>Architecture</p>
+                    <p>Processor(s)</p>
+                    <p style="height:30px">CPU utilization</p>
+                    <p style="height:30px">Memory (126.8 MB / 3.9 GB)</p>
+                    <p>Type connection</p>
+                    <p>Libvirt version</p>
+                </div>
+                <div class="span6">
+                    <p><strong>ubuntu</strong></p>
+                    <p>x86_64</p>
+                    <p>4 x None</p>
+                    <div class="progress">
+                        <span id="cpu-usage" style="text-align:center;">0%</span>
+                        <div class="progress-bar progress-bar-success" id="cpu-usage-bar" style="width: 0%;"></div>
+                    </div>
+                    <div class="progress">
+                        <span id="memory-usage" style="text-align: center;">3%</span>
+                        <div class="progress-bar progress-bar-success" id="memory-usage-bar" style="width: 3%;"></div>
+                    </div>
+                    <p>qemu+ssh://root@192.168.226.84:22/system</p>
+                    <p>9008</p>
+                </div>
+            </div>
+            <div class="page-header">
+                <h1>Virtual Machines</h1>
+            </div>
+            
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th style="width:20px;">#</th>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th style="width:250px;">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    
+                        <tr>
+                            <td>1</td>
+                            <td><a href="/instance/1/vm01/"><i class="icon-th-large"></i> vm01</a></td>
+                            <td><span class="text-success">Running</span>
+                                
+                                
+                            </td>
+                            <td>
+                                <form action="" method="post"><input name="csrfmiddlewaretoken" value="hNlLP2fdcZypUyGtqtCR5N3zGRUFJz1S" type="hidden">
+                                    <input name="vname" value="vm01" type="hidden">
+                                    
+                                    
+                                    
+                                        <button class="btn btn-default disabled" title="Start"><span class="icon icon-play"></span></button>
+                                        <button class="btn btn-default" type="submit" name="suspend" title="Pause"><span class="icon icon-pause"></span></button>
+                                        <button class="btn btn-default" type="submit" name="shutdown" title="Shutdown"><span class="icon icon-off"></span></button>
+                                        <button class="btn btn-default" type="submit" name="destroy" title="Force Shutdown" onclick="return confirm('Are you sure?')"><span class="icon icon-stop"></span></button>
+                                        <button class="btn btn-default" onclick="window.open('/console/1/vm01/?token=vm01','','width=850,height=485')" title="VNC"><span class="icon icon-align-justify"></span></button>
+                                    
+                                </form>
+                            </td>
+                        </tr>
+                    
+                    </tbody>
+                </table>

@@ -1,30 +1,22 @@
 require 'libvirt'
+require 'virt/connection'
+require 'virt/hypevisor'
+require 'virt/guest'
+
 
 module Virt
 
-  class Connection
-  	attr_reader :connection
+  class << self
 
-    def initialize(uri, options = {})
-      @connection = Libvirt::open uri
+    def connect uri, options = {}
+      @connection = Virt::Connection.new uri, options
     end
 
-    def version
-      connection.libversion
+    def connection
+      return @connection if @connection and !@connection.closed?
+      raise "No Connection or connection has been closed"
     end
 
-    def disconnect
-      connection.close
-    end
-
-    def closed?
-      connection.closed?
-    end
-
-    def secure?
-      connection.encrypted?
-    end
-    
   end
 
 end

@@ -1,0 +1,56 @@
+   <div class="span3">
+      <div class="bs-sidebar hidden-print affix" role="complementary">
+
+        <% if user_signed_in? %>
+        
+        <ul class="nav bs-sidenav">
+          <li>
+            <a href="#"><span class="icon icon-wrench"></span> <strong>Infrastruture</strong></a>
+            <ul class="nav">
+              <li>
+                <%= link_to "#" do %>
+                  <%= content_tag(:span, '', :class => 'icon-info-sign') %> Dashboard
+                <% end %>
+              </li>
+              <li>
+                <%= link_to machines_path do %>
+                  <%= content_tag(:span, '', :class => 'icon-list') %> Machines
+                <% end %>
+              </li>
+              <li>
+                <%= link_to hosts_path do %>
+                  <%= content_tag(:span, '', :class => 'icon-globe') %> Hosts
+                <% end %>
+              </li>
+            </ul>
+
+            <% if current_user.is_admin? %>
+
+            <a href="#"><span class="icon icon-wrench"></span> <strong>Admin</strong></a>
+            <ul class="nav">
+              <li>
+                <%= link_to users_path do %>
+                  <%= content_tag(:span, '', :class => 'icon-user') %> Users
+                <% end %>
+              </li>
+              <li>
+                <%= link_to roles_path do %>
+                  <%= content_tag(:span, '', :class => 'icon-align-right') %> Roles
+                <% end %>
+              </li>
+              <li>
+                <%= link_to "#" do %>
+                  <%= content_tag(:span, '', :class => 'icon-globe') %> Permissions
+                <% end %>
+              </li>
+            </ul>
+            <% end %>
+
+          </li>
+        </ul>
+
+        <% end %>
+
+      </div>
+    </div>
+

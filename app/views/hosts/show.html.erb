@@ -1,19 +1,68 @@
+
 <div class="container">
   <div class="row">
-    <div id="content">
-      <div class="well">
-        <h2><%= @host.name %></h2>
-        <p>IP: <%= @host.host %></p>
-        <p>Port: <%= @host.port %></p>
-        <p>
+    <%= render 'store/left' %>
+    <div class="span9">
 
-          <%= link_to 'Edit', edit_host_path(@host), :class => "btn btn-success" %>
-          <%= link_to 'Remove', host_path(@host), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" %>
-
-        </p>
+      <div class="page-header">
+        <h1>Overview</h1>
       </div>
+      <div class="row">
+        <div class="span4">
+          <p>Hostname</p>
+          <p>Architecture</p>
+          <p>Processor(s)</p>
+          <p style="height:30px">CPU utilization</p>
+          <p style="height:30px">Memory ( <%=  number_to_human_size(@host.get_memory_max - @host.get_memory_free) %> / <%= number_to_human_size(@host.get_memory_max) %>)</p>
+          <p>Type connection</p>
+          <p>
+            <%= link_to 'Edit', edit_host_path(@host), :class => "btn btn-success" %>
+            <%= link_to 'Remove', host_path(@host), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" %>
+          </p>
+        </div>
+        <div class="span5">
+          <p><strong><%= @host.name %></strong></p>
+          <p><%= @host.get_arch %></p>
+          <p><%= @host.get_vcpu %></p>
+          <div class="progress">
+            <span id="cpu-usage" style="text-align:center;">0%</span>
+            <div class="progress-bar progress-bar-success" id="cpu-usage-bar" style="width: 0%;"></div>
+          </div>
+          <div class="progress">
+            <span id="memory-usage" style="text-align: center;">0%</span>
+            <div class="progress-bar progress-bar-success" id="memory-usage-bar" style="width: 0%;"></div>
+          </div>
+          <p><%= @host.get_uri %></p>
+        </div>
+
+      </div> 
+
+      <div class="page-header">
+        <h1>Virtual Machines</h1>
+      </div>
+      <table class="table table-center">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>vm01</td>
+            <td><span class="text-success">Running</span></td>
+            <td>
+              <button class="btn btn-default disabled" title="Start"><span class="icon icon-play"></span></button>
+              <button class="btn btn-default" type="submit" name="suspend" title="Pause"><span class="icon icon-pause"></span></button>
+              <button class="btn btn-default" type="submit" name="shutdown" title="Shutdown"><span class="icon icon-off"></span></button>
+              <button class="btn btn-default" type="submit" name="destroy" title="Force Shutdown" onclick="return confirm('Are you sure?')"><span class="icon icon-stop"></span></button>
+              <button class="btn btn-default" onclick="window.open('/console/1/vm01/?token=vm01','','width=850,height=485')" title="VNC"><span class="icon icon-align-justify"></span></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
     </div>
+  </div>
 </div>
-
-
-

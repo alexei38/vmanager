@@ -1,9 +1,9 @@
 class HostsController < ApplicationController
 
   #load_and_authorize_resource
-  require 'virt'
   def index
     @hosts = Host.all
+    @host = Host.new
    end
 
   def show

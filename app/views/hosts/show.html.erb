@@ -13,8 +13,10 @@
           <p>Address</p>
           <p>Architecture</p>
           <p>Processor(s)</p>
-          <p style="height:30px">Memory ( <%=  number_to_human_size(@host.get_memory_max - @host.get_memory_free) %> / <%= number_to_human_size(@host.get_memory_max) %>)</p>
-          <!-- number_to_percentage(percent_of(312, 3954), precision: 0) -->
+          <p style="height:30px">
+          <!--Memory (<%=  number_to_human_size(@host.get_memory_max - @host.get_memory_free) %> / <%= number_to_human_size(@host.get_memory_max) %>) -->
+          Memory (<span id="memory-used">0</span> / <span id="memory-max">0</span>)
+          </p>
           <p>Type connection</p>
           <p>
             <%= link_to 'Edit', "#HostModal", :data => {:toggle=>"modal"}, :class => "btn btn-success" %>
@@ -31,9 +33,10 @@
             {
               $.getJSON("<%= host_path(@host) %>/memory.json", function(data) {
                 var bar = $('#memory-usage-bar');
-                var memory = data;
-                bar.width(memory);
-                bar.text(memory + "%");
+                bar.width(data.percent);
+                bar.text(data.percent + "%");
+                $("#memory-used").html(data.memory_used);
+                $("#memory-max").html(data.memory_max);
               });
             }
             updateBar();

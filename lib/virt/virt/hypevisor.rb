@@ -1,6 +1,6 @@
 module Virt
-  # Class Host
-  class Host < Virt::Connection
+  # Class Hypervisor
+  class Hypervisor < Virt::Connection
     attr_reader :connection
 
     def initialize
@@ -29,20 +29,14 @@ module Virt
       end
     end
 
-   def find_guest_by_name name
-      if connection.lookup_domain_by_name name
-        return guest({:name => name})
-      end
-    end
-
     def find_guest_by_id id
       Array(id).map do |did|
         return guest({:name => connection.lookup_domain_by_id(did).name})
       end
     end
 
-    def guest
-      Guest.new
+    def guest opts
+      Guest.new opts
     end
 
   end

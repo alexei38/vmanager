@@ -26,8 +26,8 @@ module Virt
       @connection = Libvirt::open uri
     end
 
-    def host
-      Host.new
+    def hypervisor
+      Hypervisor.new
     end
     
   end

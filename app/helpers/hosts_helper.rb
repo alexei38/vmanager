@@ -1,4 +1,5 @@
 module HostsHelper
+	
   def custom_form(name, text, value, password=nil)
     content_tag :div, :class => "control-group" do
       concat(label_tag name, text, :class => "control-label")
@@ -10,10 +11,6 @@ module HostsHelper
   	  	end
   	  end)
     end
-  end
-
-  def percent_of(a, b)
-    a.to_f / b.to_f * 100.0
   end
 
 end

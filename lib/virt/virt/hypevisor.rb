@@ -1,6 +1,6 @@
 module Virt
   # Class Host
-  class Host
+  class Host < Virt::Connection
     attr_reader :connection
 
     def initialize

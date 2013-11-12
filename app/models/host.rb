@@ -16,25 +16,25 @@ class Host < ActiveRecord::Base
 
   def version
     if connect?
-      @connection.libversion
+      @connection.connection.libversion
     end
   end
 
   def disconnect
     if connect?
-      @connection.close
+      @connection.connection.close
     end
   end
 
   def closed?
     if connect?
-      @connection.closed?
+      @connection.connection.closed?
     end
   end
 
   def get_memory_max
   	if connect?
-      @connection.node_get_info.memory * 1024
+      @connection.connection.node_get_info.memory * 1024
     else
       0
     end
@@ -42,7 +42,7 @@ class Host < ActiveRecord::Base
 
   def get_memory_free
   	if connect?
-      @connection.node_free_memory
+      @connection.connection.node_free_memory
     else
       0
     end
@@ -50,7 +50,7 @@ class Host < ActiveRecord::Base
 
   def get_vcpu
   	if connect?
-      @connection.node_get_info.cpus
+      @connection.connection.node_get_info.cpus
     else
       0
     end
@@ -58,31 +58,25 @@ class Host < ActiveRecord::Base
 
   def get_arch
   	if connect?
-      @connection.node_get_info.model
+      @connection.connection.node_get_info.model
     end
   end
 
   def get_uri
   	if connect?
-      @connection.uri
-    end
-  end
-
-  def get_connect
-    if connect?
-      Libvirt::open get_uri
+      @connection.connection.uri
     end
   end
 
   def get_hostname
   	if connect?
-      @connection.hostname
+      @connection.connection.hostname
     end
   end
 
   def get_secure?
     if connect?
-      @connection.encrypted?
+      @connection.connection.encrypted?
     end
   end
 

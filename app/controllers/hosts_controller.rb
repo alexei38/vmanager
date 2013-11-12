@@ -7,7 +7,6 @@ class HostsController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.js
     end
   end
 
@@ -22,6 +21,10 @@ class HostsController < ApplicationController
   def create
     @host = Host.new(params[:host])
     if @host.save
+      respond_to do |format|
+        format.html {}
+        format.js {}
+      end
       redirect_to @host
     else
       render "new"

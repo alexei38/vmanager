@@ -7,4 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Role.create(:name => :admin)
 Role.create(:name => :user)
-
+User.create(:firstname => "Aleksey", :lastname => "Margasov", :username => "amargasov", :email => "alexei@margasov.ru", :password => '12345678', :password_confirmation => '12345678')
+User.last.roles=Role.where(:name => 'admin')

@@ -14,12 +14,19 @@
 ActiveRecord::Schema.define(:version => 20131030053711) do
 
   create_table "hosts", :force => true do |t|
-    t.string   "name",       :default => "", :null => false
-    t.string   "host",       :default => "", :null => false
-    t.string   "port",       :default => "", :null => false
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.string   "name",         :default => "",     :null => false
+    t.string   "ip",           :default => "",     :null => false
+    t.string   "ssh_login",    :default => "root", :null => false
+    t.integer  "ssh_port",     :default => 22,     :null => false
+    t.string   "tcp_login",    :default => "",     :null => false
+    t.string   "tcp_password", :default => "",     :null => false
+    t.string   "type",         :default => "",     :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
+
+  add_index "hosts", ["ip"], :name => "index_hosts_on_ip", :unique => true
+  add_index "hosts", ["name"], :name => "index_hosts_on_name", :unique => true
 
   create_table "machines", :force => true do |t|
     t.string   "name",       :default => "", :null => false

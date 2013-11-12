@@ -7,7 +7,7 @@ class CreateHosts < ActiveRecord::Migration
       t.integer :ssh_port,              :null => false, :default => "22"
       t.string :tcp_login,              :null => false, :default => ""
       t.string :tcp_password,              :null => false, :default => ""
-      t.string :type,              :null => false, :default => ""
+      t.string :connection_type,              :null => false, :default => "ssh"
       t.timestamps
     end
     add_index :hosts, :name,                :unique => true

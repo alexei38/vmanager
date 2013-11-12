@@ -46,58 +46,9 @@
         </div>
       <% end %>
 
-        <a data-toggle="modal" href="#addHostModal" class="btn btn-primary">Add host</a>
+        <a data-toggle="modal" href="#HostModal" class="btn btn-primary">Add host</a>
 
-        <script type="text/javascript">
-          $(document).ready(function() {
-            $('#addHostModal .btn-primary').click(function(e) {
-              e.preventDefault();
-              $('#addHostModal').modal('hide');
-              $("#addHostModal div.tab-content div.active form").submit();
-            });
-          });
-        </script>
-
-        <div style="display: none;" id="addHostModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addHostModalLabel" aria-hidden="true">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="addHostModalLabel">Add host</h3>
-          </div>
-          <div class="modal-body">
-            <div class="tabbable">
-              <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab1" data-toggle="tab">TCP Connection</a></li>
-                <li><a href="#tab2" data-toggle="tab">SSH Connection</a></li>
-              </ul>
-              <div class="tab-content">
-                <div class="tab-pane active" id="tab1">
-                  <%= form_tag hosts_path, :class => 'form-horizontal', remote: true do %>
-                    <input type="hidden" name="type" id="type" value="tcp" />
-                    <%= custom_form "hostname", "Hostname" %>
-                    <%= custom_form "ip", "IP / Domain" %>
-                    <%= custom_form "tcp_login", "Login" %>
-                    <%= custom_form "tcp_password", "Password", true %>
-                    <%= custom_form "tcp_confirm_password", "Confirm Password", true %>
-                  <% end %>
-                </div>
-
-                <div class="tab-pane" id="tab2">
-                  <%= form_tag hosts_path, :class => 'form-horizontal', remote: true do %>
-                    <input type="hidden" name="type" id="type" value="ssh" />
-                    <%= custom_form "hostname", "Hostname" %>
-                    <%= custom_form "ip", "IP / Domain" %>
-                    <%= custom_form "ssh_login", "SSH Login" %>
-                    <%= custom_form "ssh_port", "SSH Port" %>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button class="btn" data-dismiss="modal">Close</button>
-            <button class="btn btn-primary">Add</button>
-          </div>
-        </div>
+        <%= render :partial => "form", :locals => {:custom_method => "post", :custom_path => hosts_path}  %>
 
     </div>
   </div>

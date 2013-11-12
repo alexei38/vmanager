@@ -1,10 +1,50 @@
-<%= form_for @host do |f| %>
-  <%= f.label :name, "Имя сервера" %>
-  <%= f.text_field :name %>
-  <%= f.label :host, "IP сервера" %>
-  <%= f.text_field :host %>
-  <%= f.label :port, "Порт сервера" %>
-  <%= f.text_field :port %>
-  <br />
-<% end %>
+        <script type="text/javascript">
+          $(document).ready(function() {
+            $('#HostModal .btn-primary').click(function(e) {
+              e.preventDefault();
+              $('#HostModal').modal('hide');
+              $("#HostModal div.tab-content div.active form").submit();
+            });
+          });
+        </script>
 
+        <div style="display: none;" id="HostModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="HostModalLabel" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="HostModalLabel">Add host</h3>
+          </div>
+          <div class="modal-body">
+            <div class="tabbable">
+              <ul class="nav nav-tabs">
+                <li class="<%= @host.connection_type == 'tcp' ? 'active' : '' %>"><a href="#tab1" data-toggle="tab">TCP Connection</a></li>
+                <li class="<%= @host.connection_type == 'ssh' ? 'active' : '' %>"><a href="#tab2" data-toggle="tab">SSH Connection</a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane <%= @host.connection_type == 'tcp' ? 'active' : '' %>" id="tab1">
+                  <%= form_tag custom_path, :method => custom_method, :class => 'form-horizontal', :name => "host", remote: true do %>
+                    <input type="hidden" name="host[connection_type]" id="host[connection_type]" value="tcp" />
+                    <%= custom_form "host[name]", "Hostname", @host.name %>
+                    <%= custom_form "host[ip]", "IP / Domain", @host.ip %>
+                    <%= custom_form "host[tcp_login]", "Login", @host.tcp_login %>
+                    <%= custom_form "host[tcp_password]", "Password", nil, true %>
+                    <%= custom_form "host[tcp_password_confirmation]", "Confirm Password", nil, true %>
+                  <% end %>
+                </div>
+
+                <div class="tab-pane <%= @host.connection_type == 'ssh' ? 'active' : '' %>" id="tab2">
+                  <%= form_tag custom_path, :method => custom_method, :class => 'form-horizontal', :name => "host", remote: true do %>
+                    <input type="hidden" name="host[connection_type]" id="host[connection_type]" value="ssh" />
+                    <%= custom_form "host[name]", "Hostname", @host.name %>
+                    <%= custom_form "host[ip]", "IP / Domain", @host.ip %>
+                    <%= custom_form "host[ssh_login]", "SSH Login", @host.ssh_login %>
+                    <%= custom_form "host[ssh_port]", "SSH Port", @host.ssh_port %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Submit</button>
+          </div>
+        </div>

@@ -25,9 +25,8 @@ class HostsController < ApplicationController
         format.html {}
         format.js {}
       end
-      redirect_to @host
     else
-      render "new"
+      #render "new"
     end
   end
 
@@ -49,7 +48,7 @@ class HostsController < ApplicationController
     @host = Host.find(params[:id])
     @host.destroy
     respond_to do |format|
-      format.html { redirect_to admin_hosts_path }
+      format.html { redirect_to hosts_path }
       format.xml  { head :ok }
     end
   end

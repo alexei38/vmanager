@@ -53,4 +53,16 @@ class HostsController < ApplicationController
     end
   end
 
+  def memory
+    @host = Host.find(params[:id])
+    memory_used = @host.get_memory_max.to_f - @host.get_memory_free.to_f
+    memory_max = @host.get_memory_max.to_f ||= 1
+    memory_percentage = (memory_used / memory_max * 100).to_i
+    respond_to do |format|
+      format.json {
+      render :json => [memory_percentage]
+    }
+    end
+  end
+
 end

@@ -1,32 +1,40 @@
 class Host < ActiveRecord::Base
-  validates_presence_of :name
-  validates_presence_of :ip
+  validates_presence_of :name, uniqueness: { case_sensitive: false }
+  validates_presence_of :ip, uniqueness: { case_sensitive: false }
   validates_presence_of :connection_type
-  validates :tcp_password, :presence => false, :confirmation =>true
-  attr_accessible :connection, :connection_type, :name, :ip, :ssh_login, :ssh_port, :tcp_login, :tcp_password, :tcp_password_confirmation
+  validates_confirmation_of :tcp_password, :if => :validate_password?
+  validates :ssh_port, :numericality => true
+  attr_accessible :connection, :connection_type, :name, :ip, :login, :ssh_port, :tcp_password, :tcp_password_confirmation
 
   def connect
-  	begin
-      if connection_type == 'ssh'
-  	    @connection =  Virt.connect("qemu+ssh://#{ssh_login}@#{self.ip}/system")
-      else
-        @connection =  nil
-      end
-
-  	end
+    @connection = Virt.connect(self.connection_type, self.ip, self.login, self.tcp_password, self.ssh_port) 
   end
 
   def connect?
-  	begin
-  	  self.connect
-  	rescue
-  	  return nil
-  	end
+	  self.connect
+  end
+
+  def version
+    if connect?
+      @connection.libversion
+    end
+  end
+
+  def disconnect
+    if connect?
+      @connection.close
+    end
+  end
+
+  def closed?
+    if connect?
+      @connection.closed?
+    end
   end
 
   def get_memory_max
   	if connect?
-      @connection.memory_max
+      @connection.node_get_info.memory * 1024
     else
       0
     end
@@ -34,7 +42,7 @@ class Host < ActiveRecord::Base
 
   def get_memory_free
   	if connect?
-      @connection.memory_free
+      @connection.node_free_memory
     else
       0
     end
@@ -42,7 +50,7 @@ class Host < ActiveRecord::Base
 
   def get_vcpu
   	if connect?
-      @connection.vcpu
+      @connection.node_get_info.cpus
     else
       0
     end
@@ -50,7 +58,7 @@ class Host < ActiveRecord::Base
 
   def get_arch
   	if connect?
-      @connection.arch
+      @connection.node_get_info.model
     end
   end
 
@@ -60,9 +68,32 @@ class Host < ActiveRecord::Base
     end
   end
 
+  def get_connect
+    if connect?
+      Libvirt::open get_uri
+    end
+  end
+
   def get_hostname
   	if connect?
       @connection.hostname
     end
   end
+
+  def get_secure?
+    if connect?
+      @connection.encrypted?
+    end
+  end
+
+  private
+
+  def validate_password?
+    if tcp_password.present? || tcp_password_confirmation.present?
+      return true
+    else
+      return false
+    end
+  end
+
 end

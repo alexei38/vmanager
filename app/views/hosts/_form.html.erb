@@ -25,7 +25,7 @@
                     <input type="hidden" name="host[connection_type]" id="host[connection_type]" value="tcp" />
                     <%= custom_form "host[name]", "Hostname", @host.name %>
                     <%= custom_form "host[ip]", "IP / Domain", @host.ip %>
-                    <%= custom_form "host[tcp_login]", "Login", @host.tcp_login %>
+                    <%= custom_form "host[login]", "Login", @host.login %>
                     <%= custom_form "host[tcp_password]", "Password", nil, true %>
                     <%= custom_form "host[tcp_password_confirmation]", "Confirm Password", nil, true %>
                   <% end %>
@@ -36,7 +36,7 @@
                     <input type="hidden" name="host[connection_type]" id="host[connection_type]" value="ssh" />
                     <%= custom_form "host[name]", "Hostname", @host.name %>
                     <%= custom_form "host[ip]", "IP / Domain", @host.ip %>
-                    <%= custom_form "host[ssh_login]", "SSH Login", @host.ssh_login %>
+                    <%= custom_form "host[login]", "Login", @host.login %>
                     <%= custom_form "host[ssh_port]", "SSH Port", @host.ssh_port %>
                   <% end %>
                 </div>

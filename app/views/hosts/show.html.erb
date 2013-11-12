@@ -13,8 +13,8 @@
           <p>Address</p>
           <p>Architecture</p>
           <p>Processor(s)</p>
-          <p style="height:30px">CPU utilization</p>
           <p style="height:30px">Memory ( <%=  number_to_human_size(@host.get_memory_max - @host.get_memory_free) %> / <%= number_to_human_size(@host.get_memory_max) %>)</p>
+          <!-- number_to_percentage(percent_of(312, 3954), precision: 0) -->
           <p>Type connection</p>
           <p>
             <%= link_to 'Edit', "#HostModal", :data => {:toggle=>"modal"}, :class => "btn btn-success" %>
@@ -24,18 +24,39 @@
 
         <%= render :partial => "form", :locals => {:custom_method => "put", :custom_path => host_path(@host)}  %>
 
+        <script type="text/javascript">
+          $(document).ready(function(){
+
+            function updateBar()
+            {
+              $.getJSON("<%= host_path(@host) %>/memory.json", function(data) {
+                var bar = $('#memory-usage-bar');
+                var memory = data;
+                bar.width(memory);
+                bar.text(memory + "%");
+              });
+            }
+            updateBar();
+            setInterval(function()
+            {
+              updateBar()
+            }, 15000);
+          });
+        </script>
+
         <div class="span5">
           <p><strong><%= @host.name %></strong></p>
           <p><%= @host.ip %></p>
           <p><%= @host.get_arch %></p>
           <p><%= @host.get_vcpu %></p>
-          <div class="progress">
-            <span id="cpu-usage" style="text-align:center;">0%</span>
-            <div class="progress-bar progress-bar-success" id="cpu-usage-bar" style="width: 0%;"></div>
-          </div>
-          <div class="progress">
-            <span id="memory-usage" style="text-align: center;">0%</span>
-            <div class="progress-bar progress-bar-success" id="memory-usage-bar" style="width: 0%;"></div>
+          <script type="text/javascript">
+            $(document).ready(function(){
+
+
+            });
+          </script>
+          <div class="progress progress-striped active">
+            <div class="bar" id="memory-usage-bar" style="width: 0%;"></div>
           </div>
           <p><%= @host.get_uri %></p>
         </div>

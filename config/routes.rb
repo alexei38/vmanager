@@ -14,7 +14,7 @@ Vmanager::Application.routes.draw do
   resources :hosts
   resources :machines
   resources :templates
-
+  get '/hosts/:id/memory.:format', :to => 'hosts#memory'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

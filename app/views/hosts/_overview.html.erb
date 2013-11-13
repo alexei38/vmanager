@@ -1,9 +1,29 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    function updateBar()
+    {
+      $.getJSON("<%= host_path(@host) %>/memory.json", function(data) {
+        var bar = $('#memory-usage-bar');
+        bar.width(data.percent);
+        $("#memory-usage-text").html(data.percent);
+        $("#memory-used").html(data.memory_used);
+        $("#memory-max").html(data.memory_max);
+      });
+    }
+    updateBar();
+    setInterval(function()
+    {
+      updateBar()
+    }, 15000);
+  });
+</script>
+
 <div class="row">
   <div class="span4">
     <p>Hostname</p>
+    <p>Status</p>
     <p>Address</p>
-    <p>Architecture</p>
-    <p>Processor(s)</p>
     <p style="height:30px">
     Memory (<span id="memory-used">0</span> / <span id="memory-max">0</span>)
     </p>
@@ -16,19 +36,19 @@
 
   <div class="span5">
     <p><strong><%= @host.name %></strong></p>
+    <p>
+      <% if @host.connect? %>
+        <%= content_tag(:span, 'Active', :class => 'text-success') %> 
+      <% else %>
+        <%= content_tag(:span, 'No connection', :class => 'text-error') %> 
+      <% end %>
+    </p>
     <p><%= @host.ip %></p>
-    <p><%= @host.get_arch %></p>
-    <p><%= @host.get_vcpu %></p>
-    <script type="text/javascript">
-      $(document).ready(function(){
-
-
-      });
-    </script>
     <div class="progress progress-striped active">
       <div class="bar" id="memory-usage-bar" style="width: 0%;"></div>
+      <span id="memory-usage-text"></span>
     </div>
-    <p><%= @host.get_uri %></p>
+    <p><%= @host.connection_type %></p>
   </div>
 
 </div>

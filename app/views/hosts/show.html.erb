@@ -3,6 +3,9 @@
   <div class="row">
     <%= render 'store/left' %>
     <div class="span9">
+      <div id="error_block">
+        <%= render 'store/error' %>
+      </div>
 
       <div class="page-header">
         <h1>Overview</h1>
@@ -11,32 +14,15 @@
       <div id="overview">
         <%= render :partial => "overview" %>
       </div>  
+
       <%= render :partial => "form", :locals => {:custom_method => "put", :custom_path => host_path(@host)}  %>
-
-      <script type="text/javascript">
-        $(document).ready(function(){
-
-          function updateBar()
-          {
-            $.getJSON("<%= host_path(@host) %>/memory.json", function(data) {
-              var bar = $('#memory-usage-bar');
-              bar.width(data.percent);
-              bar.text(data.percent + "%");
-              $("#memory-used").html(data.memory_used);
-              $("#memory-max").html(data.memory_max);
-            });
-          }
-          updateBar();
-          setInterval(function()
-          {
-            updateBar()
-          }, 15000);
-        });
-      </script>
-
       <div class="page-header">
         <h1>Virtual Machines</h1>
       </div>
+      <p><%= link_to 'Create', "#MachineModal", :data => {:toggle=>"modal"}, :class => "btn btn-success" %></p>
+      
+      <%= render :partial => "create_machine"  %>
+
       <table class="table table-center">
         <thead>
           <tr>

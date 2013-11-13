@@ -14,24 +14,6 @@ class Host < ActiveRecord::Base
 	  self.connect
   end
 
-  def version
-    if connect?
-      @connection.connection.libversion
-    end
-  end
-
-  def disconnect
-    if connect?
-      @connection.connection.close
-    end
-  end
-
-  def closed?
-    if connect?
-      @connection.connection.closed?
-    end
-  end
-
   def get_memory_max
   	if connect?
       @connection.connection.node_get_info.memory * 1024
@@ -59,24 +41,8 @@ class Host < ActiveRecord::Base
   def get_arch
   	if connect?
       @connection.connection.node_get_info.model
-    end
-  end
-
-  def get_uri
-  	if connect?
-      @connection.connection.uri
-    end
-  end
-
-  def get_hostname
-  	if connect?
-      @connection.connection.hostname
-    end
-  end
-
-  def get_secure?
-    if connect?
-      @connection.connection.encrypted?
+    else
+      "&nbsp;"
     end
   end
 

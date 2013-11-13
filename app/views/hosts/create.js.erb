@@ -1,2 +1,3 @@
 <% @hosts = Host.all %>
+$("#error_block").html("<%= escape_javascript(render 'store/error') %>")
 $("#hostlist").html("<%= escape_javascript(render 'hostlist') %>");

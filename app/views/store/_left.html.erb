@@ -8,7 +8,7 @@
             <a href="#"><span class="icon icon-wrench"></span> <strong>Infrastruture</strong></a>
             <ul class="nav">
               <li>
-                <%= link_to "#" do %>
+                <%= link_to dashboard_index_path do %>
                   <%= content_tag(:span, '', :class => 'icon-info-sign') %> Dashboard
                 <% end %>
               </li>
@@ -20,6 +20,11 @@
               <li>
                 <%= link_to hosts_path do %>
                   <%= content_tag(:span, '', :class => 'icon-globe') %> Hosts
+                <% end %>
+              </li>
+              <li>
+                <%= link_to pools_path do %>
+                  <%= content_tag(:span, '', :class => 'icon-hdd') %> Pools
                 <% end %>
               </li>
             </ul>

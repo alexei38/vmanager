@@ -1,3 +1,4 @@
 <% @host = Host.find(@host.id) %>
+$("#error_block").html("<%= escape_javascript(render 'store/error') %>")
 $("#overview").html("<%= escape_javascript(render 'overview') %>");
 

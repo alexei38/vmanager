@@ -1,0 +1,47 @@
+        <script type="text/javascript">
+          $(document).ready(function() {
+            $('#MachineModal .btn-primary').click(function(e) {
+              e.preventDefault();
+              $('#MachineModal').modal('hide');
+              $("#MachineModal div.tab-content div.active form").submit();
+            });
+          });
+        </script>
+
+        <div style="display: none;" id="MachineModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="MachineModalLabel" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="MachineModalLabel">Add Virtual Machine</h3>
+          </div>
+          <div class="modal-body">
+            <div class="tabbable">
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#MachineTab1" data-toggle="tab">New machine</a></li>
+                <li><a href="#MachineTab2" data-toggle="tab">From template</a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane active" id="MachineTab1">
+                  <%= form_tag machine_path, :method => 'post', :class => 'form-horizontal', :name => "machine", remote: true do %>
+                    <input type="hidden" name="machine[host]" id="machine[host]" value="tcp" />
+                    <%= custom_form "machine[name]", "Name", nil, 'text' %>
+                    <%= custom_form "machine[arch]", "Arch", ['x86', 'x86-64'], 'select' %>
+                    <%= custom_form "machine[vcpu]", "Cpu", nil, 'text' %>
+                    <%= custom_form "machine[vmem]", "Memory", nil, 'text' %>
+                    <%= custom_form "machine[virtio]", "Virtio", nil, 'checkbox' %>
+                    <%= custom_form "machine[image]", "image", ['x86', 'x86-64'], 'select' %>
+                  <% end %>
+                </div>
+                <div class="tab-pane" id="MachineTab2">
+                  <div class="well"><h1>From template</h1></div>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Submit</button>
+          </div>
+        </div>

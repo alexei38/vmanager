@@ -2,10 +2,9 @@
   <div class="row">
     <%= render 'store/left' %>
     <div class="span9">
-            
-      <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-      <% end %>
+      <div id="error_block">
+        <%= render 'store/error' %>
+      </div>
 
       <div class="page-header">
         <h1>Hosts</h1>
@@ -13,7 +12,7 @@
 
       <div id="hostlist">
         <% if @hosts.count > 0 %>
-            <%= render :partial => "hostlist" %>
+          <%= render :partial => "hostlist" %>
         <% else %>
           <div class="well" style="text-align: center;">
             <h4 style="font-size: 18px;font-weight: 500;">Add a new host</h4>
@@ -21,7 +20,7 @@
         <% end %>
       </div>
 
-        <a data-toggle="modal" href="#HostModal" class="btn btn-primary">Add host</a>
+        <a data-toggle="modal" href="#HostModal" class="btn btn-success">Add host</a>
 
         <%= render :partial => "form", :locals => {:custom_method => "post", :custom_path => hosts_path}  %>
 

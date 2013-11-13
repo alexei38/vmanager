@@ -23,21 +23,21 @@
                 <div class="tab-pane <%= @host.connection_type == 'tcp' ? 'active' : '' %>" id="tab1">
                   <%= form_tag custom_path, :method => custom_method, :class => 'form-horizontal', :name => "host", remote: true do %>
                     <input type="hidden" name="host[connection_type]" id="host[connection_type]" value="tcp" />
-                    <%= custom_form "host[name]", "Hostname", @host.name %>
-                    <%= custom_form "host[ip]", "IP / Domain", @host.ip %>
-                    <%= custom_form "host[login]", "Login", @host.login %>
-                    <%= custom_form "host[tcp_password]", "Password", nil, true %>
-                    <%= custom_form "host[tcp_password_confirmation]", "Confirm Password", nil, true %>
+                    <%= custom_form "host[name]", "Hostname", @host.name, 'text' %>
+                    <%= custom_form "host[ip]", "IP / Domain", @host.ip, 'text' %>
+                    <%= custom_form "host[login]", "Login", @host.login, 'text' %>
+                    <%= custom_form "host[tcp_password]", "Password", nil, 'password' %>
+                    <%= custom_form "host[tcp_password_confirmation]", "Confirm Password", nil, 'password' %>
                   <% end %>
                 </div>
 
                 <div class="tab-pane <%= @host.connection_type == 'ssh' ? 'active' : '' %>" id="tab2">
                   <%= form_tag custom_path, :method => custom_method, :class => 'form-horizontal', :name => "host", remote: true do %>
                     <input type="hidden" name="host[connection_type]" id="host[connection_type]" value="ssh" />
-                    <%= custom_form "host[name]", "Hostname", @host.name %>
-                    <%= custom_form "host[ip]", "IP / Domain", @host.ip %>
-                    <%= custom_form "host[login]", "Login", @host.login %>
-                    <%= custom_form "host[ssh_port]", "SSH Port", @host.ssh_port %>
+                    <%= custom_form "host[name]", "Hostname", @host.name, 'text' %>
+                    <%= custom_form "host[ip]", "IP / Domain", @host.ip, 'text' %>
+                    <%= custom_form "host[login]", "Login", @host.login, 'text' %>
+                    <%= custom_form "host[ssh_port]", "SSH Port", @host.ssh_port, 'text' %>
                   <% end %>
                 </div>
               </div>

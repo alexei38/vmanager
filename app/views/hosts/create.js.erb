@@ -1,0 +1,2 @@
+<% @hosts = Host.all %>
+$("#hostlist").html("<%= escape_javascript(render 'hostlist') %>");

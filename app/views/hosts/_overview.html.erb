@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="span4">
+    <p>Hostname</p>
+    <p>Address</p>
+    <p>Architecture</p>
+    <p>Processor(s)</p>
+    <p style="height:30px">
+    Memory (<span id="memory-used">0</span> / <span id="memory-max">0</span>)
+    </p>
+    <p>Type connection</p>
+    <p>
+      <%= link_to 'Edit', "#HostModal", :data => {:toggle=>"modal"}, :class => "btn btn-success" %>
+      <%= link_to 'Remove', host_path(@host), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" %>
+    </p>
+  </div>
+
+  <div class="span5">
+    <p><strong><%= @host.name %></strong></p>
+    <p><%= @host.ip %></p>
+    <p><%= @host.get_arch %></p>
+    <p><%= @host.get_vcpu %></p>
+    <script type="text/javascript">
+      $(document).ready(function(){
+
+
+      });
+    </script>
+    <div class="progress progress-striped active">
+      <div class="bar" id="memory-usage-bar" style="width: 0%;"></div>
+    </div>
+    <p><%= @host.get_uri %></p>
+  </div>
+
+</div>

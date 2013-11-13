@@ -1,0 +1,26 @@
+<table class="table table-striped table-center" >
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th style="text-align:center">Status</th>
+      <th>Vcpu</th>
+      <th>Memory</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @hosts.each do |host| %>
+      <tr>
+        <td><%= link_to host.name, host_path(host) %></td>
+        <td>
+          <% if host.connect? %>
+            <%= content_tag(:span, 'Active', :class => 'text-success') %> 
+          <% else %>
+            <%= content_tag(:span, 'No connection', :class => 'text-error') %> 
+          <% end %>
+        </td>
+        <td><%= host.get_vcpu %></td>
+        <td><%= number_to_human_size host.get_memory_max %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

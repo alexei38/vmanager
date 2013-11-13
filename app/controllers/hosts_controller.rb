@@ -38,9 +38,10 @@ class HostsController < ApplicationController
     @host = Host.find(params[:id])
  
     if @host.update_attributes(params[:host])
-      redirect_to @host
-    else
-      render 'edit'
+      respond_to do |format|
+        format.html {}
+        format.js {}
+      end
     end
   end
 

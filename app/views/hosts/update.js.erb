@@ -1,0 +1,3 @@
+<% @host = Host.find(@host.id) %>
+$("#overview").html("<%= escape_javascript(render 'overview') %>");
+

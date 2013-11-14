@@ -1,59 +1,38 @@
 module Virt
-  #Class Guest
-  class Guest
-    attr_reader :connection, :name
 
-    def initialize options = {}
-      @connection = Virt.connection.connection
-      @name = options[:name]
-      fetch_guest
+  class Connection
+
+    def guest_create
     end
 
-    def new?
-      @domain.nil?
+    def guest_save
     end
 
-    def create
+    def guest_info
     end
 
-    def save
-    end
-
-    def info
-    end
-
-    def start
+    def guest_start
       raise "Guest not created, can't start" if new?
       @domain.create unless running?
       running?
     end
 
-    def shutdown
+    def guest_shutdown
       stop
     end
 
-    def poweroff
+    def guest_poweroff
       stop(true)
     end
 
-    def uuid
+    def guest_uuid
       @domain.uuid unless new?
     end
 
-    def to_s
-      name.to_s
+    def guest_restart
     end
 
-    def restart
-    end
-
-    def get_xml
-    end
-
-    protected
-
-    def fetch_guest
-      @domain = connection.lookup_domain_by_name(name)
+    def guest_xml
     end
 
   end

@@ -10,7 +10,17 @@
       <div class="page-header">
         <h1>Pools</h1>
       </div>
+      <p>
+        <a data-toggle="modal" href="#PoolModal" class="btn btn-success">Add Pool</a>
+        <a data-toggle="modal" href="#PoolXMLModal" class="btn btn-success">Add Custom Pool</a>
+      </p>
 
+      <%= render "pool_list" %>
+      
+      <%= render "form_pool" %>
+
+      <%= render "custom_pool" %>
+      
     </div>
   </div>
 </div>

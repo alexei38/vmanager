@@ -7,43 +7,23 @@ class Host < ActiveRecord::Base
   attr_accessible :connection, :connection_type, :name, :ip, :login, :ssh_port, :tcp_password, :tcp_password_confirmation
 
   def connect
-    @connection = Virt.connect(self.connection_type, self.ip, self.login, self.tcp_password, self.ssh_port) 
-  end
-
-  def connect?
-	  self.connect
+    @connection = Virt::Connection.new(self.connection_type, self.ip, self.login, self.tcp_password, self.ssh_port) 
   end
 
   def get_memory_max
-  	if connect?
-      @connection.connection.node_get_info.memory * 1024
-    else
-      0
-    end
+    connect.connection.node_get_info.memory * 1024
   end
 
   def get_memory_free
-  	if connect?
-      @connection.connection.node_free_memory
-    else
-      0
-    end
+    connect.connection.node_free_memory
   end
 
   def get_vcpu
-  	if connect?
-      @connection.connection.node_get_info.cpus
-    else
-      0
-    end
+    connect.connection.node_get_info.cpus
   end
 
   def get_arch
-  	if connect?
-      @connection.connection.node_get_info.model
-    else
-      "&nbsp;"
-    end
+    connect.connection.node_get_info.model
   end
 
   private

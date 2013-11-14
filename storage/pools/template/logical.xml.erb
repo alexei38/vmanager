@@ -1,0 +1,12 @@
+<pool type="logical">
+  <name><%= name %></name>
+  <capacity unit="G"><%= size %></capacity>
+  <source>
+    <device path="<%= source %>"/>
+    <name>vg</name>
+    <format type='lvm2'/>
+  </source>
+  <target>
+    <path><%= path %></path>
+  </target>
+</pool>

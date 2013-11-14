@@ -1,0 +1,46 @@
+<div style="display: none;" id="PoolModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="PoolModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="PoolModalLabel">Add Pool</h3>
+  </div>
+  <div class="modal-body">
+    <div class="tabbable">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab1" data-toggle="tab">Create VM Pool</a></li>
+        <li><a href="#tab2" data-toggle="tab">Create ISO Pool</a></li>
+        <li><a href="#tab3" data-toggle="tab">Create Template Pool</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab1">
+          <%= form_tag pools_path, :class => 'form-horizontal', :name => "pool", remote: true do %>
+            <%= custom_form "pool[name]", "Name", nil, 'text' %>
+            <%= custom_form "pool[host]", "Host", Host.all.collect {|x| [x.name, x.id]}, 'select' %>
+            <%= custom_form "pool[format]", "Format", ['raw', 'qcow2', 'lvm2'], 'select' %>
+          <% end %>
+        </div>
+
+        <div class="tab-pane" id="tab2">
+          <%= form_tag pools_path, :class => 'form-horizontal', :name => "pool", remote: true do %>
+            <%= custom_form "host[name]", "Name", nil, 'text' %>
+            <%= custom_form "host[host]", "Host", Host.all.collect {|x| [x.name, x.id]}, 'select' %>
+            <%= custom_form "host[format]", "Format", ['raw', 'qcow2', 'lvm2'], 'select' %>
+          <% end %>
+        </div>
+
+        <div class="tab-pane" id="tab2">
+          <%= form_tag pools_path, :class => 'form-horizontal', :name => "pool", remote: true do %>
+            <%= custom_form "host[name]", "Name", nil, 'text' %>
+            <%= custom_form "host[host]", "Host", Host.all.collect {|x| [x.name, x.id]}, 'select' %>
+            <%= custom_form "host[format]", "Format", ['raw', 'qcow2', 'lvm2'], 'select' %>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal">Close</button>
+    <button class="btn btn-primary">Submit</button>
+  </div>
+</div>

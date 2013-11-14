@@ -1,0 +1,11 @@
+<pool type="logical">
+  <name><%= pool_name %></name>
+  <source>
+    <device path="<%= pool_source %>"/>
+    <name>vg</name>
+    <format type='lvm2'/>
+  </source>
+  <target>
+    <path><%= pool_path %></path>
+  </target>
+</pool>

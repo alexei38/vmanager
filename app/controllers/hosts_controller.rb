@@ -1,4 +1,5 @@
 class HostsController < ApplicationController
+  
   include ActionView::Helpers::NumberHelper 
   #load_and_authorize_resource
   def index
@@ -76,7 +77,7 @@ class HostsController < ApplicationController
     @host = Host.find(params[:id])
     memory_used = @host.get_memory_max.to_f - @host.get_memory_free.to_f
     memory_max = @host.get_memory_max.to_f ||= 1
-    memory_percentage = @host.connect? ? (memory_used / memory_max * 100) : 0
+    memory_percentage = @host.connect ? (memory_used / memory_max * 100) : 0
     respond_to do |format|
       format.json {
         render :json => { 

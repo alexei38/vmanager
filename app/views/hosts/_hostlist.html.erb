@@ -12,7 +12,7 @@
       <tr>
         <td><%= link_to host.name, host_path(host) %></td>
         <td>
-          <% if host.connect? %>
+          <% if host.connect %>
             <%= content_tag(:span, 'Active', :class => 'text-success') %> 
           <% else %>
             <%= content_tag(:span, 'No connection', :class => 'text-error') %> 

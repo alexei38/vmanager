@@ -8,26 +8,28 @@ module Virt
     attr_reader :connection
 
     def initialize(connection_type, ip, login, tcp_password = nil, ssh_port = nil, options = {})
-      if connection_type == 'tcp'
-        connection_tcp("qemu+tcp://#{ip}/system", login, tcp_password)
-      elsif connection_type == 'ssh'
-        connection_ssh("qemu+ssh://#{login}@#{ip}/system")
-      end
-    end
-
-    def connection_tcp(uri, login, tcp_password)
-      @connection = Libvirt::open_auth(uri, [Libvirt::CRED_AUTHNAME, Libvirt::CRED_PASSPHRASE]) do |cred|
-        case cred['type']
-          when ::Libvirt::CRED_AUTHNAME
-            login
-          when ::Libvirt::CRED_PASSPHRASE
-            tcp_password
+      begin
+        if connection_type == 'tcp'
+          uri = "qemu+tcp://#{ip}/system"
+          @connection = Libvirt::open_auth(uri, [Libvirt::CRED_AUTHNAME, Libvirt::CRED_PASSPHRASE]) do |cred|
+            case cred['type']
+              when ::Libvirt::CRED_AUTHNAME
+                login
+              when ::Libvirt::CRED_PASSPHRASE
+                tcp_password
+            end
+          end
+        elsif connection_type == 'ssh'
+          uri = "qemu+ssh://#{login}@#{ip}/system"
+          @connection = Libvirt::open (uri)
         end
+      rescue ::Libvirt::ConnectionError
+        @connecton = nil
       end
     end
 
-    def connection_ssh(uri)
-      @connection = Libvirt::open uri
+    def terminate
+      @connecton.close if @connecton and !@connecton.closed?
     end
 
   end

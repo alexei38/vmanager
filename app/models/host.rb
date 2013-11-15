@@ -11,19 +11,31 @@ class Host < ActiveRecord::Base
   end
 
   def get_memory_max
-    connect.connection.node_get_info.memory * 1024
+    if connect.connection
+      connect.connection.node_get_info.memory * 1024
+      connect.connection.close
+    end
   end
 
   def get_memory_free
-    connect.connection.node_free_memory
+    if connect.connection
+      connect.connection.node_free_memory
+      connect.connection.close
+    end
   end
 
   def get_vcpu
-    connect.connection.node_get_info.cpus
+    if connect.connection
+      connect.connection.node_get_info.cpus
+      connect.connection.close
+    end
   end
 
   def get_arch
-    connect.connection.node_get_info.model
+    if connect.connection
+      connect.connection.node_get_info.model
+      connect.connection.close
+    end
   end
 
   private

@@ -15,7 +15,7 @@
     setInterval(function()
     {
       updateBar()
-    }, 30000);
+    }, 600);
   });
 </script>
 
@@ -37,7 +37,7 @@
   <div class="span5">
     <p><strong><%= @host.name %></strong></p>
     <p>
-      <% if @host.connect? %>
+      <% if @host.connect %>
         <%= content_tag(:span, 'Active', :class => 'text-success') %> 
       <% else %>
         <%= content_tag(:span, 'No connection', :class => 'text-error') %> 
